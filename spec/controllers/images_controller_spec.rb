@@ -17,11 +17,11 @@ RSpec.describe ImagesController, type: :controller do
 
   describe "images#create action" do 
     it "should create a new image to the database" do
-      post :create, params: {image: {message: 'Hello'}}
+      post :create, params: {image: {message: 'Hello!'}}
       expect(response).to redirect_to root_path
 
       image = Image.last
-      expect(gram.message).to eq("Hello!")
+      expect(image.message).to eq("Hello!")
     end
   end
 end
