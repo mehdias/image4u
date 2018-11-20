@@ -23,5 +23,13 @@ RSpec.describe ImagesController, type: :controller do
       image = Image.last
       expect(image.message).to eq("Hello!")
     end
+    it "shoud properly deal with validation errors" do
+      post :create, params: {image: {message: ''}}
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(Image.count).to eq 0
+    end
+
+
+
   end
 end

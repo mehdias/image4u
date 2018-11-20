@@ -9,7 +9,11 @@ class ImagesController < ApplicationController
 
   def create
     @image = Image.create(image_params)
-    redirect_to root_path
+    if @image.valid?
+      redirect_to root_path
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
