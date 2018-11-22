@@ -1,14 +1,17 @@
 class ImagesController < ApplicationController
-  def index
+  before_action :authenticate_user!, only: [:new, :create]
+ 
 
-  end
 
   def new
     @image = Image.new
   end
-
+  
+  def index
+  end
+  
   def create
-    @image = Image.create(image_params)
+    @image = current_user.images.create(image_params)
     if @image.valid?
       redirect_to root_path
     else
