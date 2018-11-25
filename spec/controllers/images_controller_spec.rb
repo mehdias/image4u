@@ -1,6 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe ImagesController, type: :controller do
+  describe "images#show action" do
+    it "should successfully show the page if the image is found" do
+      image = FactoryBot.create(:image)
+      get :show, params: {id: image.id}
+      expect(response).to have_http_status(:success)
+    end
+
+    it "should return a 404 error if the image is not found" do
+      get :show, params: {id: 'TACOCAT'}
+      expect(response).to have_http_status(:not_found)
+
+    end
+  end
   describe "images#index action" do
     it "should successfully show the page" do
       get :index
