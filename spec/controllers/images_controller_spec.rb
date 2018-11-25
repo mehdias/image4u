@@ -15,11 +15,7 @@ RSpec.describe ImagesController, type: :controller do
 
     end
     it "should successfully show the new form" do
-      user = User.create(
-        email:                 'fakeeuser@gmail.com',
-        password:              'secretPassword',
-        password_confirmation: 'secretPassword' 
-        )
+      user = FactoryBot.create(:user)
         sign_in user
 
       get :new
@@ -34,11 +30,7 @@ RSpec.describe ImagesController, type: :controller do
     end
 
     it "should create a new image in our database" do
-      user = User.create(
-        email:                 'fakeuser@gmail.com',
-        password:              'secretPassword',
-        password_confirmation: 'secretPassword'
-        )
+      user = FactoryBot.create(:user)
         sign_in user
 
       post :create, params: {image: {message: 'Hello!'}}
@@ -50,11 +42,7 @@ RSpec.describe ImagesController, type: :controller do
     end
 
     it "should properly deal with validation errors" do
-      user = User.create(
-        email:                 'fakeuser@gmail.com',
-        password:              'secretPassword',
-        password_confirmation: 'secretPassword'
-      )
+      user = FactoryBot.create(:user)
       sign_in user
       image_count = Image.count
       post :create, params: {image: {message: ''}}
