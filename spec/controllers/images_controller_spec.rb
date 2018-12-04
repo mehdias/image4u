@@ -1,6 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe ImagesController, type: :controller do
+  describe "images#edit action" do
+    it "should successfully show the edit form if the image is found" do
+    
+    end
+
+    it "should return a 404 error message if the gram is not found" do
+    
+    end
+    
   describe "images#show action" do
     it "should successfully show the page if the image is found" do
       image = FactoryBot.create(:image)
