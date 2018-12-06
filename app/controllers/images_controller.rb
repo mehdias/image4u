@@ -37,6 +37,14 @@ class ImagesController < ApplicationController
         return render :edit, status: :unprocessable_entity
       end
   end
+  def destroy
+    @image = Image.find_by_id(params[:id])
+     return render_not_found if @image.blank?
+     @image.destroy
+     redirect_to root_path
+  end
+
+
 
   private
 

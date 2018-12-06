@@ -99,4 +99,17 @@ RSpec.describe ImagesController, type: :controller do
     end
 
   end
+  describe "images#destroy action" do
+    it "should allow a user to destroy images" do
+      image = FactoryBot.create(:image)
+      delete :destroy, params: {id: image.id}
+      expect(response).to redirect_to root_path
+      image = Image.find_by_id(image.id)
+      expect(image).to eq nil
+    end
+    it "should return a 404 message if we cannot find an image with the id that is specified" do
+      delete :destroy, params: { id: 'NO'}
+      expect(response).to have_http_status (:not_found)
+    end
+  end
 end
