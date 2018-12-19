@@ -1,1 +1,7 @@
-<h1> your image </h1>
+<h1> your images </h1>
+<% @images.each do |image| %>
+    <div> 
+      <%= image.message %>
+      <%= image_tag image.picture %>
+    </div>
+<%end%>

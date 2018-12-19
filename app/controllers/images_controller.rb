@@ -17,6 +17,7 @@ class ImagesController < ApplicationController
   end
 
   def index
+    @images = Image.all
   end
 
   def create
@@ -49,7 +50,7 @@ class ImagesController < ApplicationController
   private
 
   def image_params
-    params.require(:image).permit(:message)
+    params.require(:image).permit(:message, :picture)
   end
 
   def render_not_found(status=:not_found)
