@@ -44,7 +44,12 @@ RSpec.describe ImagesController, type: :controller do
     it "should create a new image in our database" do
       user = FactoryBot.create(:user)
       sign_in user
-      post :create, params: {image: {message: 'Hello!'}}
+      post :create, params: {
+        image: {
+          message: 'Hello!',
+          picture: fixture_file_upload("/picture.png", 'image/png')
+        }
+      }
       expect(response).to redirect_to root_path
       image = Image.last
       expect(image.message).to eq("Hello!")
