@@ -1,7 +1,36 @@
-<h1> your images </h1>
-<% @images.each do |image| %>
-    <div> 
+<div class = "col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+  <% @images.each do |image| %>
+  <div class = "card">
+    <div class = "handle"><%= image.user.email %></div>
+    <%= image_tag image.picture, class: "img-fluid" %>
+    <p> 
       <%= image.message %>
-      <%= image_tag image.picture %>
+    </p>
+    <div class = "image-actions float-right">
+      <% if current_user && current_user == image.user %>
+        <%= link_to 'Edit', edit_image_path(image) %>
+        <%= link_to 'Destroy', image_path(image), method: :delete, data: {confirm: 'Are you sure you want to delete? '} %>
+
+      <% end %>
     </div>
-<%end%>
+    <br class= "clear-fix" />
+    <div class = "comments">
+      <h3> Comments </h3>
+      <% image.comments.each do |comment| %>
+        <span class= "comment_handle">
+          <%= comment.user.email %>
+        </span>
+        <%= comment.message %>
+      </div>
+      <% end %>
+      <h4> Add a comment </h4>
+      <%= simple_form_for Comment.new, url: image_comments_path(image) do |f| %>
+        <%= f.input :message %>
+        <%= f.submit 'Add comment', class: 'my-btn' %>
+      <% end %>
+    </div>
+
+  </div>
+  <%end%>
+</div>
+
